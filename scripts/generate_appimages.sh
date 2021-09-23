@@ -62,10 +62,22 @@ for frontend in ${FRONTENDS[@]}; do
   cp -av ${TRANSLATIONS_DIR} ${CURRENT_APPDIR}/usr/bin
 done
 
+# Replace Patchelf
+curl -sSfLO https://github.com/NixOS/patchelf/releases/download/0.12/patchelf-0.12.tar.bz2        
+tar xvf patchelf-0.12.tar.bz2
+cd patchelf-0.12*/ 
+./configure
+make && sudo make install
+cd ${BUILD_DIR}
+
 # Pass UPDATE_INFORMATION and OUTPUT variables (used by linuxdeploy-plugin-appimage)
 # to the environment of the linuxdeploy commands
 
-${BUILD_DIR}/linuxdeploy-x86_64.AppImage \
+${BUILD_DIR}/linuxdeploy-x86_64.AppImage --appimage-extract
+mv ${BUILD_DIR}/squashfs-root/usr/bin/patchelf ${BUILD_DIR}/squashfs-root/usr/bin/patchelf.orig
+sudo cp /usr/local/bin/patchelf ${BUILD_DIR}/squashfs-root/usr/bin/patchelf 
+
+${BUILD_DIR}/squashfs-root/AppRun \
   --appdir=${BUILD_DIR}/duckstation-qt.AppDir \
   --executable=${BUILD_DIR}/bin/duckstation-qt \
   --desktop-file=${APPIMAGE_RESOURCES_DIR}/linux-desktop-files/duckstation-qt.desktop \
@@ -83,7 +95,7 @@ ${BUILD_DIR}/linuxdeploy-plugin-appimage-x86_64.AppImage \
 
 UPDATE_INFORMATION="zsync|https://github.com/stenzek/duckstation/releases/download/latest/duckstation-nogui-x64.AppImage.zsync" \
 OUTPUT="duckstation-nogui-x64.AppImage" \
-${BUILD_DIR}/linuxdeploy-x86_64.AppImage \
+${BUILD_DIR}/squashfs-root/AppRun \
   --appdir=${BUILD_DIR}/duckstation-nogui.AppDir \
   --executable=${BUILD_DIR}/bin/duckstation-nogui \
   --desktop-file=${APPIMAGE_RESOURCES_DIR}/linux-desktop-files/duckstation-nogui.desktop \
