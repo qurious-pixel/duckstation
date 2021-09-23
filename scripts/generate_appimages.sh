@@ -78,9 +78,10 @@ mv ${BUILD_DIR}/squashfs-root/usr/bin/patchelf ${BUILD_DIR}/squashfs-root/usr/bi
 sudo cp /usr/local/bin/patchelf ${BUILD_DIR}/squashfs-root/usr/bin/patchelf 
 
 mkdir -p ${BUILD_DIR}/duckstation-qt.AppDir/usr/plugins
-mkdir -p ${BUILD_DIR}/duckstation-qt.AppDir/usr/lib
+mkdir -p ${BUILD_DIR}/duckstation-qt.AppDir/usr/lib/dri
 cp /usr/lib/x86_64-linux-gnu/{libQt5WaylandClient.so.5,libEGL_mesa.so.0} ${BUILD_DIR}/duckstation-qt.AppDir/usr/lib
-cp -r /usr/lib/x86_64-linux-gnu/qt5/plugins/{xcbglintegrations,platforms,wayland-graphics-integration-client} ${BUILD_DIR}/duckstation-qt.AppDir/usr/plugins
+cp /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so ${BUILD_DIR}/duckstation-qt.AppDir/usr/lib/dri
+cp -r /usr/lib/x86_64-linux-gnu/qt5/plugins/{xcbglintegrations,platforms,wayland-graphics-integration-client,wayland-decoration-client,wayland-shell-integration} ${BUILD_DIR}/duckstation-qt.AppDir/usr/plugins
 
 ${BUILD_DIR}/squashfs-root/AppRun \
   --appdir=${BUILD_DIR}/duckstation-qt.AppDir \
