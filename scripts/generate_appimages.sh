@@ -77,6 +77,9 @@ ${BUILD_DIR}/linuxdeploy-x86_64.AppImage --appimage-extract
 mv ${BUILD_DIR}/squashfs-root/usr/bin/patchelf ${BUILD_DIR}/squashfs-root/usr/bin/patchelf.orig
 sudo cp /usr/local/bin/patchelf ${BUILD_DIR}/squashfs-root/usr/bin/patchelf 
 
+mkdir -p ${BUILD_DIR}/duckstation-qt.AppDir/usr/plugins
+cp -r /usr/lib/x86_64-linux-gnu/qt5/plugins/{xcbglintegrations,platforms,wayland-graphics-integration-client} ${BUILD_DIR}/duckstation-qt.AppDir/usr/plugins
+
 ${BUILD_DIR}/squashfs-root/AppRun \
   --appdir=${BUILD_DIR}/duckstation-qt.AppDir \
   --executable=${BUILD_DIR}/bin/duckstation-qt \
