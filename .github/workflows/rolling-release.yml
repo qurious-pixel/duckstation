@@ -92,7 +92,7 @@ jobs:
           name: "linux-x64-appimage-qt-zsync"
 
       - name: Create preview release
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/appimage'
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
@@ -106,7 +106,7 @@ jobs:
             linux-x64-appimage-qt-zsync/duckstation-qt-x64.AppImage.zsync
 
       - name: Create dev release
-        if: github.ref == 'refs/heads/dev'
+        if: github.ref == 'refs/heads/appimage-dev'
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
