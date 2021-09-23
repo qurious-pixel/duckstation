@@ -8,8 +8,6 @@ on:
       - 'scripts/*'
       - '.github/ISSUE_TEMPLATE/*'
   push:
-    branches:
-      - appimage-dev
     paths-ignore:
       - '**.md'
       - 'appveyor.yml'
