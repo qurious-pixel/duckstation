@@ -77,12 +77,6 @@ ${BUILD_DIR}/linuxdeploy-x86_64.AppImage --appimage-extract
 mv ${BUILD_DIR}/squashfs-root/usr/bin/patchelf ${BUILD_DIR}/squashfs-root/usr/bin/patchelf.orig
 sudo cp /usr/local/bin/patchelf ${BUILD_DIR}/squashfs-root/usr/bin/patchelf 
 
-mkdir -p ${BUILD_DIR}/duckstation-qt.AppDir/usr/plugins
-mkdir -p ${BUILD_DIR}/duckstation-qt.AppDir/usr/lib/dri
-cp /usr/lib/x86_64-linux-gnu/{libQt5WaylandClient.so.5,libEGL_mesa.so.0} ${BUILD_DIR}/duckstation-qt.AppDir/usr/lib
-cp /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so ${BUILD_DIR}/duckstation-qt.AppDir/usr/lib/dri
-cp -r /usr/lib/x86_64-linux-gnu/qt5/plugins/{xcbglintegrations,platforms,wayland-graphics-integration-client,wayland-decoration-client,wayland-shell-integration} ${BUILD_DIR}/duckstation-qt.AppDir/usr/plugins
-
 ${BUILD_DIR}/squashfs-root/AppRun \
   --appdir=${BUILD_DIR}/duckstation-qt.AppDir \
   --executable=${BUILD_DIR}/bin/duckstation-qt \
@@ -100,6 +94,12 @@ ${BUILD_DIR}/linuxdeploy-plugin-appimage-x86_64.AppImage \
   --appdir=${BUILD_DIR}/duckstation-qt.AppDir
   
 cp -r ${BUILD_DIR}/duckstation-qt.AppDir ${BUILD_DIR}/duckstation-wayland.AppDir
+mkdir -p ${BUILD_DIR}/duckstation-wayland.AppDir/usr/plugins
+mkdir -p ${BUILD_DIR}/duckstation-wayland.AppDir/usr/lib/dri
+cp /usr/lib/x86_64-linux-gnu/{libQt5WaylandClient.so.5,libEGL_mesa.so.0} ${BUILD_DIR}/duckstation-wayland.AppDir/usr/lib
+cp /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so ${BUILD_DIR}/duckstation-wayland.AppDir/usr/lib/dri
+cp -r /usr/lib/x86_64-linux-gnu/qt5/plugins/{xcbglintegrations,platforms,wayland-graphics-integration-client,wayland-decoration-client,wayland-shell-integration} ${BUILD_DIR}/duckstation-wayland.AppDir/usr/plugins
+
 cat <<'EOF'>> ${BUILD_DIR}/duckstation-wayland.AppDir/apprun-hooks/linuxdeploy-plugin-qt-hook.sh
 
 case "${WAYLAND_DISPLAY}" in
