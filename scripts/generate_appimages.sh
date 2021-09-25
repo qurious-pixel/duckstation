@@ -98,6 +98,21 @@ UPDATE_INFORMATION="zsync|https://github.com/stenzek/duckstation/releases/downlo
 OUTPUT="duckstation-qt-x64.AppImage" \
 ${BUILD_DIR}/linuxdeploy-plugin-appimage-x86_64.AppImage \
   --appdir=${BUILD_DIR}/duckstation-qt.AppDir
+  
+cp -r ${BUILD_DIR}/duckstation-qt.AppDir ${BUILD_DIR}/duckstation-wayland.AppDir
+cat <<'EOF'>> ${BUILD_DIR}/duckstation-wayland.AppDir/apprun-hooks/linuxdeploy-plugin-qt-hook.sh
+
+case "${WAYLAND_DISPLAY}" in
+	*wayland*)
+		export QT_QPA_PLATFORM=wayland
+		;;
+esac
+EOF
+  
+UPDATE_INFORMATION="zsync|https://github.com/stenzek/duckstation/releases/download/latest/duckstation-wayland-x64.AppImage.zsync" \
+OUTPUT="duckstation-wayland-x64.AppImage" \
+${BUILD_DIR}/linuxdeploy-plugin-appimage-x86_64.AppImage \
+  --appdir=${BUILD_DIR}/duckstation-wayland.AppDir  
 
 UPDATE_INFORMATION="zsync|https://github.com/stenzek/duckstation/releases/download/latest/duckstation-nogui-x64.AppImage.zsync" \
 OUTPUT="duckstation-nogui-x64.AppImage" \
