@@ -21,10 +21,9 @@ ECHO const char* g_scm_hash_str = "%HASH%";
 ECHO const char* g_scm_branch_str = "%BRANCH%";
 ECHO const char* g_scm_tag_str = "%TAG%";
 ECHO const char* g_scm_date_str = "%CDATE%";
+ECHO const char* g_scm_tag_hi_str = "%TAG:~0,1%";
+ECHO const char* g_scm_tag_med_str = "%TAG:~2,1%";
+ECHO const char* g_scm_tag_lo_str = "%TAG:~4,4%";
 )>%VERSIONFILE%
-
-SET DUCK_VersionHi=%TAG:~0,1%
-SET DUCK_VersionMid=%TAG:~2,1%
-SET DUCK_VersionLo=echo %TAG:~4,4%
 
 EXIT
