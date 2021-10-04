@@ -17,9 +17,9 @@
 
 // Add Version info
 //
-#define DUCK_VersionHi     1
-#define DUCK_VersionMid    7
-#define DUCK_VersionLo     0
+#define DUCK_VersionHi     g_scm_tag_hi_str
+#define DUCK_VersionMid    g_scm_tag_med_str
+#define DUCK_VersionLo     g_scm_tag_lo_str
 
 #define STRINGIZE2(s) #s
 #define STRINGIZE(s) STRINGIZE2(s)
