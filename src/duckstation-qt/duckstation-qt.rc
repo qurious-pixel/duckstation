@@ -44,6 +44,21 @@ END
 
 #endif    // APSTUDIO_INVOKED
 
+#define DUCK_VersionHi     1
+#define DUCK_VersionMid    7
+#define DUCK_VersionLo     0
+
+#define STRINGIZE2(s) #s
+#define STRINGIZE(s) STRINGIZE2(s)
+
+#define VER_FILE_VERSION            DUCK_VersionHi, DUCK_VersionMid, DUCK_VersionLo, 0
+#define VER_FILE_VERSION_STR        STRINGIZE(DUCK_VersionHi)        \
+                                    "." STRINGIZE(DUCK_VersionMid)    \
+                                    "." STRINGIZE(DUCK_VersionLo) \
+                                    "." STRINGIZE(0)    \
+                                    
+#define VER_PRODUCT_VERSION         VER_FILE_VERSION
+#define VER_PRODUCT_VERSION_STR     VER_FILE_VERSION_STR
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -69,12 +84,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "https://github.com/stenzek/duckstation"
             VALUE "FileDescription", "DuckStation PS1 Emulator"
-            VALUE "FileVersion", "1.0.0.1"
+            VALUE "FileVersion", VER_FILE_VERSION_STR "\0"
             VALUE "InternalName", "duckstation-qt.exe"
             VALUE "LegalCopyright", "Copyright (C) 2020 Stenzek and collaborators"
             VALUE "OriginalFilename", "duckstation-qt.exe"
             VALUE "ProductName", "DuckStation Qt Frontend"
-            VALUE "ProductVersion", "1.0.0.1"
+            VALUE "ProductVersion", VER_PRODUCTNAME_STR "\0"
         END
     END
     BLOCK "VarFileInfo"
