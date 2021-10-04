@@ -14,3 +14,21 @@
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
+
+// Add Version info
+//
+#define DUCK_VersionHi     1
+#define DUCK_VersionMid    7
+#define DUCK_VersionLo     0
+
+#define STRINGIZE2(s) #s
+#define STRINGIZE(s) STRINGIZE2(s)
+
+#define VER_FILE_VERSION            DUCK_VersionHi, DUCK_VersionMid, DUCK_VersionLo, 0
+#define VER_FILE_VERSION_STR        STRINGIZE(DUCK_VersionHi)        \
+                                    "." STRINGIZE(DUCK_VersionMid)    \
+                                    "." STRINGIZE(DUCK_VersionLo) \
+                                    "." STRINGIZE(0)    \
+                                    
+#define VER_PRODUCT_VERSION         VER_FILE_VERSION
+#define VER_PRODUCT_VERSION_STR     VER_FILE_VERSION_STR
