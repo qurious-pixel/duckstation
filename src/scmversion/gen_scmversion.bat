@@ -23,5 +23,8 @@ ECHO const char* g_scm_tag_str = "%TAG%";
 ECHO const char* g_scm_date_str = "%CDATE%";
 )>%VERSIONFILE%
 
-EXIT
+SET DUCK_VersionHi=%TAG:~0,1%
+SET DUCK_VersionMid=%TAG:~2,1%
+SET DUCK_VersionLo=echo %TAG:~4,4%
 
+EXIT
