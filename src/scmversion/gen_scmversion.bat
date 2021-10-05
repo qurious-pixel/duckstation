@@ -23,8 +23,8 @@ ECHO const char* g_scm_tag_str = "%TAG%";
 ECHO const char* g_scm_date_str = "%CDATE%";
 )>%VERSIONFILE%
 
-echo #define SCM_TAG_HI "%TAG:~0,1%" >> src/scmversion/tag.h
-echo #define SCM_TAG_MED "%TAG:~2,1%" >> src/scmversion/tag.h
-echo #define SCM_TAG_LO "%TAG:~4,4%" >> src/scmversion/tag.h
+ECHO #define SCM_TAG_HI "%TAG:~0,1%" >> src/scmversion/tag.h
+ECHO #define SCM_TAG_MED "%TAG:~2,1%" >> src/scmversion/tag.h
+ECHO #define SCM_TAG_LO "%TAG:~4,4%" >> src/scmversion/tag.h
 
 EXIT
