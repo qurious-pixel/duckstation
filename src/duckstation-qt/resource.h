@@ -1,4 +1,4 @@
-#include "scmversion/tag.h"
+#include "scmversion/scmversion.h"
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
 // Used by duckstation-qt.rc
@@ -18,9 +18,9 @@
 
 // Add Version info
 //
-#define DUCK_VersionHi     SCM_TAG_HI
-#define DUCK_VersionMid    SCM_TAG_MED
-#define DUCK_VersionLo     SCM_TAG_LO
+#define DUCK_VersionHi     g_scm_tag_hi_str
+#define DUCK_VersionMid    g_scm_tag_med_str
+#define DUCK_VersionLo     g_scm_tag_lo_str
 
 #define STRINGIZE2(s) #s
 #define STRINGIZE(s) STRINGIZE2(s)
