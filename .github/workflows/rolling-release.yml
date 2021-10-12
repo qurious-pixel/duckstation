@@ -48,6 +48,7 @@ jobs:
         version: '6.2.0'
         os: 'linux'
         platform: 'desktop'
+        modules: 'qtwaylandcompositor'
            
     - name: Compile build
       shell: bash
