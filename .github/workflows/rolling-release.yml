@@ -46,8 +46,8 @@ jobs:
       uses: WillBrennan/yaqti@2021.07.29
       with:
         version: '6.2.0'
-        host: 'linux'
-        target: 'desktop'
+        os: 'linux'
+        platform: 'desktop'
            
     - name: Compile build
       shell: bash
