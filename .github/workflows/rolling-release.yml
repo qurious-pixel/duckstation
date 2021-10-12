@@ -28,21 +28,27 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get -y install cmake ninja-build ccache libsdl2-dev libgtk-3-dev qtbase5-dev qtbase5-dev-tools qtbase5-private-dev qt5-default qttools5-dev qtwayland5 libegl1-mesa-dev libevdev-dev libgbm-dev libdrm-dev libqt5waylandclient5-dev libqt5waylandcompositor5-dev libwayland-dev libwayland-egl-backend-dev extra-cmake-modules libcurl4-gnutls-dev libxrandr-dev
-        sudo apt-get -y install libfontconfig1-dev libfreetype6-dev libx11-dev libx11-xcb-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev libxcb-glx0-dev libxcb-keysyms1-dev libxcb-image0-dev libxcb-shm0-dev libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-randr0-dev libxcb-render-util0-dev libxcb-util-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev gstreamer1.0-gl gstreamer1.0-gtk3
+        #sudo apt-get -y install libfontconfig1-dev libfreetype6-dev libx11-dev libx11-xcb-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev libxcb-glx0-dev libxcb-keysyms1-dev libxcb-image0-dev libxcb-shm0-dev libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-randr0-dev libxcb-render-util0-dev libxcb-util-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev gstreamer1.0-gl gstreamer1.0-gtk3
         
-    - name: Install QT6
-      shell: bash
-      env:
-        QTVERSION: 6.2.0
-      run: |
-        echo "QTVERSION ${QTVERSION}"
-        curl -sLO https://download.qt.io/official_releases/qt/6.2/6.2.0/single/qt-everywhere-src-${QTVERSION}.tar.xz
-        tar xf qt-everywhere-src-${QTVERSION}.tar.xz
-        cd qt-everywhere-src-${QTVERSION}
-        ./configure -prefix /usr -bundled-xcb-xinput
-        cmake --build .
-        cmake --install .
-      
+    #- name: Install QT6
+    #  shell: bash
+    #  env:
+    #    QTVERSION: 6.2.0
+    #  run: |
+    #    echo "QTVERSION ${QTVERSION}"
+    #    curl -sLO https://download.qt.io/official_releases/qt/6.2/6.2.0/single/qt-everywhere-src-${QTVERSION}.tar.xz
+    #    tar xf qt-everywhere-src-${QTVERSION}.tar.xz
+    #    cd qt-everywhere-src-${QTVERSION}
+    #    ./configure -prefix /usr -bundled-xcb-xinput
+    #    cmake --build .
+    #    cmake --install .
+    - name: Install Qt
+      uses: WillBrennan/yaqti@2021.07.29
+      with:
+        version: '6.2.0'
+        host: 'linux'
+        target: 'desktop'
+           
     - name: Compile build
       shell: bash
       run: |
