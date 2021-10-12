@@ -134,11 +134,11 @@ set(TS_FILES
 )
 
 set_source_files_properties(${TS_FILES} PROPERTIES OUTPUT_LOCATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/translations")
-qt5_add_translation(QM_FILES ${TS_FILES})
+qt_add_translation(QM_FILES ${TS_FILES})
 
 add_executable(duckstation-qt ${SRCS} ${QM_FILES})
-target_include_directories(duckstation-qt PRIVATE "${Qt5Gui_PRIVATE_INCLUDE_DIRS}")
-target_link_libraries(duckstation-qt PRIVATE frontend-common core common imgui glad minizip scmversion vulkan-loader Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Network)
+target_include_directories(duckstation-qt PRIVATE "${QtGui_PRIVATE_INCLUDE_DIRS}")
+target_link_libraries(duckstation-qt PRIVATE frontend-common core common imgui glad minizip scmversion vulkan-loader Qt::Core Qt::Gui Qt::Widgets Qt::Network)
 
 if(WIN32)
   # We want a Windows subsystem application not console.
