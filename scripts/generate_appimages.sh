@@ -98,7 +98,8 @@ mkdir -p ${BUILD_DIR}/duckstation-wayland.AppDir/usr/plugins
 mkdir -p ${BUILD_DIR}/duckstation-wayland.AppDir/usr/lib/dri
 cp /usr/lib/x86_64-linux-gnu/{libQt5WaylandClient.so.5,libEGL_mesa.so.0} ${BUILD_DIR}/duckstation-wayland.AppDir/usr/lib
 cp /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so ${BUILD_DIR}/duckstation-wayland.AppDir/usr/lib/dri
-cp -r /usr/lib/x86_64-linux-gnu/qt5/plugins/{xcbglintegrations,platforms,wayland-graphics-integration-client,wayland-decoration-client,wayland-shell-integration} ${BUILD_DIR}/duckstation-wayland.AppDir/usr/plugins
+#cp -r /usr/lib/x86_64-linux-gnu/qt5/plugins/{xcbglintegrations,platforms,wayland-graphics-integration-client,wayland-decoration-client,wayland-shell-integration} ${BUILD_DIR}/duckstation-wayland.AppDir/usr/plugins
+cp -r ${GITHUB_WORKSPACE}/qt/6.2.0/gcc_64/plugins/{xcbglintegrations,platforms,wayland-graphics-integration-client,wayland-decoration-client,wayland-shell-integration} ${BUILD_DIR}/duckstation-wayland.AppDir/usr/plugins
 
 cat <<'EOF'>> ${BUILD_DIR}/duckstation-wayland.AppDir/apprun-hooks/linuxdeploy-plugin-qt-hook.sh
 
