@@ -60,7 +60,7 @@ jobs:
         export Qt6_DIR=${GITHUB_WORKSPACE}/$Qt6_DIR
         echo "Qt6_DIR ${Qt6_DIR}"
         find qt/ -name Qt6Config.cmake 
-        cp $Qt6_DIR/gcc_64/lib/cmake/Qt6/Qt6Config.cmake /usr/share/cmake-3.21/Modules
+        cp $Qt6_DIR/gcc_64/lib/cmake/Qt6/Qt6Config.cmake /usr/share/cmake-*/Modules
         mkdir build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_NOGUI_FRONTEND=ON -DBUILD_QT_FRONTEND=ON -DUSE_DRMKMS=ON -DUSE_EGL=ON -DUSE_SDL2=ON -DUSE_WAYLAND=ON -DUSE_X11=ON -G Ninja ..
