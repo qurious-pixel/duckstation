@@ -61,6 +61,9 @@ jobs:
         export Qt6_DIR=${CMAKE_PREFIX_PATH}/lib/cmake/Qt6/
         echo "Qt6_DIR ${Qt6_DIR}"
         find qt/ -name Qt6Config.cmake 
+        sudo mv /usr/bin/qmake /usr/bin/qmake5
+        find qt/ -name qmake
+        sudo ln -s ${GITHUB_WORKSPACE}/$(find qt/ -name qmake) /usr/bin
         mkdir build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_NOGUI_FRONTEND=ON -DBUILD_QT_FRONTEND=ON -DUSE_DRMKMS=ON -DUSE_EGL=ON -DUSE_SDL2=ON -DUSE_WAYLAND=ON -DUSE_X11=ON -G Ninja ..
