@@ -54,11 +54,11 @@ jobs:
     - name: Compile build
       shell: bash
       env:
-        Qt6_DIR: ${GITHUB_WORKSPACE}/qt/6.2.0
+        Qt6_DIR: ${{ GITHUB_WORKSPACE/qt/6.2.0 }}
       run: |
         echo "HOME ${GITHUB_WORKSPACE}"
-        echo "HOME ${Qt6_DIR}"
-        find qt/ -iname *.cmake 
+        echo "Qt6_DIR ${Qt6_DIR}"
+        find qt/ -name Qt6Config.cmake 
         mkdir build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_NOGUI_FRONTEND=ON -DBUILD_QT_FRONTEND=ON -DUSE_DRMKMS=ON -DUSE_EGL=ON -DUSE_SDL2=ON -DUSE_WAYLAND=ON -DUSE_X11=ON -G Ninja ..
