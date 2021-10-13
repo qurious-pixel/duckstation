@@ -54,9 +54,10 @@ jobs:
     - name: Compile build
       shell: bash
       env:
-        Qt6_DIR: "${GITHUB_WORKSPACE}/qt/6.2.0"
+        Qt6_DIR: "qt/6.2.0"
       run: |
         echo "HOME ${GITHUB_WORKSPACE}"
+        Qt6_DIR=${GITHUB_WORKSPACE}/$Qt6_DIR
         echo "Qt6_DIR ${Qt6_DIR}"
         find qt/ -name Qt6Config.cmake 
         mkdir build
