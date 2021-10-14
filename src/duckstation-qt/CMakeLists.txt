@@ -185,12 +185,13 @@ if(APPLE)
   set_source_files_properties("${CMAKE_CURRENT_SOURCE_DIR}/DuckStation.icns" PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
 
   # Copy Qt plugins into the bundle
-  get_target_property(qtcocoa_location Qt6::Qt6QCocoaIntegrationPlugin LOCATION)
-  target_sources(duckstation-qt PRIVATE "${qtcocoa_location}")
-  #set_source_files_properties("${qtcocoa_location}" PROPERTIES MACOSX_PACKAGE_LOCATION MacOS/platforms)
+  #get_target_property(qtcocoa_location Qt6::Qt6QCocoaIntegrationPlugin LOCATION)
   qt_import_plugins(duckstation-qt
     INCLUDE Qt6::QCocoaIntegrationPlugin
   )
+  target_sources(duckstation-qt PRIVATE "${qtcocoa_location}")
+  #set_source_files_properties("${qtcocoa_location}" PROPERTIES MACOSX_PACKAGE_LOCATION MacOS/platforms)
+  
 
   get_target_property(qtmacstyle_location Qt6::Qt6QMacStylePlugin LOCATION)
   target_sources(duckstation-qt PRIVATE "${qtmacstyle_location}")
