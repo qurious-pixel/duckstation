@@ -10,11 +10,9 @@
 #include <QtGui/QWindowStateChangeEvent>
 #include <cmath>
 
-/*
 #if !defined(_WIN32) && !defined(APPLE)
-#include <qpa/qplatformnativeinterface.h>
+#include <QPlatformNativeInterface>
 #endif
-*/
 
 QtDisplayWidget::QtDisplayWidget(QWidget* parent) : QWidget(parent)
 {
