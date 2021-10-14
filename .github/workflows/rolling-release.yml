@@ -18,6 +18,10 @@ on:
 jobs:
   linux-build:
     runs-on: ubuntu-20.04
+    env:
+      QTVER: 5.15.2
+      QTVERMIN: 515
+      UBUNTU_VER: focal
     steps:
     - uses: actions/checkout@v2.3.1
       with:
@@ -26,24 +30,14 @@ jobs:
     - name: Install packages
       shell: bash
       run: |
+        sudo add-apt-repository -y ppa:beineri/opt-qt-${QTVER}-${UBUNTU_VER}
         sudo apt-get update
-        sudo apt-get -y install cmake ninja-build ccache libsdl2-dev libgtk-3-dev libegl1-mesa-dev libevdev-dev libgbm-dev libdrm-dev libwayland-dev libwayland-egl-backend-dev extra-cmake-modules libcurl4-gnutls-dev libxrandr-dev
+        #sudo apt-get -y install cmake ninja-build ccache libsdl2-dev libgtk-3-dev libegl1-mesa-dev libevdev-dev libgbm-dev libdrm-dev libwayland-dev libwayland-egl-backend-dev extra-cmake-modules libcurl4-gnutls-dev libxrandr-dev
         #sudo apt-get -y install cmake ninja-build ccache libsdl2-dev libgtk-3-dev qtbase5-dev qtbase5-dev-tools qtbase5-private-dev qt5-default qttools5-dev qtwayland5 libegl1-mesa-dev libevdev-dev libgbm-dev libdrm-dev libqt5waylandclient5-dev libqt5waylandcompositor5-dev libwayland-dev libwayland-egl-backend-dev extra-cmake-modules libcurl4-gnutls-dev libxrandr-dev
+        sudo apt-get -y install cmake ninja-build ccache libsdl2-dev libgtk-3-dev qt${QTVERMIN}base qt${QTVERMIN}declarative qt${QTVERMIN}xmlpatterns qt${QTVERMIN}svg qt${QTVERMIN}tools qt${QTVERMIN}wayland qt${QTVERMIN}webengine libegl1-mesa-dev libevdev-dev libgbm-dev libdrm-dev libwayland-dev libwayland-egl-backend-dev extra-cmake-modules libcurl4-gnutls-dev libxrandr-dev
         #sudo apt-get -y install libfontconfig1-dev libfreetype6-dev libx11-dev libx11-xcb-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev libxcb-glx0-dev libxcb-keysyms1-dev libxcb-image0-dev libxcb-shm0-dev libxcb-icccm4-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-randr0-dev libxcb-render-util0-dev libxcb-util-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev gstreamer1.0-gl gstreamer1.0-gtk3
         
-    #- name: Install QT6
-    #  shell: bash
-    #  env:
-    #    QTVERSION: 6.2.0
-    #  run: |
-    #    echo "QTVERSION ${QTVERSION}"
-    #    curl -sLO https://download.qt.io/official_releases/qt/6.2/6.2.0/single/qt-everywhere-src-${QTVERSION}.tar.xz
-    #    tar xf qt-everywhere-src-${QTVERSION}.tar.xz
-    #    cd qt-everywhere-src-${QTVERSION}
-    #    ./configure -prefix /usr -bundled-xcb-xinput
-    #    cmake --build .
-    #    cmake --install .
-    - name: Install Qt
+    - name: Install Qt6
       uses: WillBrennan/yaqti@2021.07.29
       with:
         version: '6.2.0'
@@ -54,16 +48,18 @@ jobs:
     - name: Compile build
       shell: bash
       env:
+        Qt5_DIR: "opt/5.15.2"
         Qt6_DIR: "qt/6.2.0"
       run: |
-        echo "HOME ${GITHUB_WORKSPACE}"
-        export CMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/$Qt6_DIR/gcc_64
-        export Qt6_DIR=${CMAKE_PREFIX_PATH}/lib/cmake/Qt6/
-        echo "Qt6_DIR ${Qt6_DIR}"
-        find qt/ -name Qt6Config.cmake 
-        sudo mv /usr/bin/qmake /usr/bin/qmake5
-        find qt/ -name qmake
-        sudo ln -s ${GITHUB_WORKSPACE}/$(find qt/ -name qmake) /usr/bin
+        if [[ $(qmake -v | grep 'Qt' | awk ' { print $4 } ') == 6.2.0 ]]; then
+          export CMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/$Qt6_DIR/gcc_64
+          export Qt6_DIR=${CMAKE_PREFIX_PATH}/lib/cmake/Qt6/
+          echo "Qt6_DIR ${Qt6_DIR}"
+          sudo mv /usr/bin/qmake /usr/bin/qmake5
+          sudo ln -s ${GITHUB_WORKSPACE}/$(find qt/ -name qmake) /usr/bin
+        else
+          /opt/qt${QTVERMIN}/bin/qt${QTVERMIN}-env.sh
+        fi
         mkdir build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_NOGUI_FRONTEND=ON -DBUILD_QT_FRONTEND=ON -DUSE_DRMKMS=ON -DUSE_EGL=ON -DUSE_SDL2=ON -DUSE_WAYLAND=ON -DUSE_X11=ON -G Ninja ..
@@ -106,41 +102,11 @@ jobs:
         name: "linux-x64-appimage-wayland-zsync"
         path: "build/duckstation-wayland-x64.AppImage.zsync"
 
-  macos-build:
-    runs-on: macos-10.15
-    steps:
-    - uses: actions/checkout@v2.3.1
-      with:
-        fetch-depth: 0
-
-    - name: Install packages
-      shell: bash
-      run: |
-        brew install qt6 sdl2 curl
-    - name: Clone mac externals
-      shell: bash
-      run: |
-        git clone https://github.com/stenzek/duckstation-ext-mac.git dep/mac
-    - name: Compile and zip .app
-      shell: bash
-      run: |
-        mkdir build
-        cd build
-        export MACOSX_DEPLOYMENT_TARGET=10.15
-        cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_NOGUI_FRONTEND=OFF -DBUILD_QT_FRONTEND=ON -DUSE_SDL2=ON -DQt6_DIR=/usr/local/opt/qt@6/lib/cmake/Qt6 ..
-        cmake --build . --parallel 2
-        cd bin
-        zip -r duckstation-mac-release.zip DuckStation.app/
-    - name: Upload macOS .app
-      uses: actions/upload-artifact@v1
-      with:
-        name: "macos-x64"
-        path: "build/bin/duckstation-mac-release.zip"
         
   create-release:
     needs: [linux-build]
     runs-on: "ubuntu-20.04"
-    if: github.ref == 'refs/heads/appimage' || github.ref == 'refs/heads/QT6'
+    if: github.ref == 'refs/heads/appimage' || github.ref == 'refs/heads/QT5-6'
     steps:
       - name: Download NoGUI AppImage Artifact
         uses: actions/download-artifact@v1
@@ -189,7 +155,7 @@ jobs:
             linux-x64-appimage-wayland-zsync/duckstation-wayland-x64.AppImage.zsync
             
       - name: Create dev release
-        if: github.ref == 'refs/heads/QT6'
+        if: github.ref == 'refs/heads/QT5-6'
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
