@@ -51,7 +51,7 @@ jobs:
         Qt5_DIR: "opt/5.15.2"
         Qt6_DIR: "qt/6.2.0"
       run: |
-        if [[ $(qmake -v | grep 'Qt' | awk ' { print $4 } ') == 6.2.0 ]]; then
+        if [[ -e $Qt6_DIR ]; then
           export CMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/$Qt6_DIR/gcc_64
           export Qt6_DIR=${CMAKE_PREFIX_PATH}/lib/cmake/Qt6/
           echo "Qt6_DIR ${Qt6_DIR}"
