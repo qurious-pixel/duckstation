@@ -187,7 +187,7 @@ if(APPLE)
   # Copy Qt plugins into the bundle
   #get_target_property(qtcocoa_location Qt6::Qt6QCocoaIntegrationPlugin LOCATION)
   qt_import_plugins(duckstation-qt
-    INCLUDE Qt6::QCocoaIntegrationPlugin
+    INCLUDE Qt6::Qt6QCocoaIntegrationPlugin
   )
   target_sources(duckstation-qt PRIVATE "${qtcocoa_location}")
   #set_source_files_properties("${qtcocoa_location}" PROPERTIES MACOSX_PACKAGE_LOCATION MacOS/platforms)
