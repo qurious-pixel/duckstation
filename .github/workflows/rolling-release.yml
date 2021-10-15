@@ -63,6 +63,7 @@ jobs:
           echo "Qt5_DIR $Qt5_DIR"
           /opt/qt${QTVERMIN}/bin/qt${QTVERMIN}-env.sh
         fi
+        echo "Qt version $(qmake -v | grep 'Qt' | awk ' { print $4 } ')"
         mkdir build
         cd build
         cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_NOGUI_FRONTEND=ON -DBUILD_QT_FRONTEND=ON -DUSE_DRMKMS=ON -DUSE_EGL=ON -DUSE_SDL2=ON -DUSE_WAYLAND=ON -DUSE_X11=ON -G Ninja ..
