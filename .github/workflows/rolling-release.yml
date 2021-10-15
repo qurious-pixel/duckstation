@@ -61,7 +61,7 @@ jobs:
           export Qt5_DIR=${CMAKE_PREFIX_PATH}/Qt5/
           echo "CMAKE_PREFIX_PATH $CMAKE_PREFIX_PATH"
           echo "Qt5_DIR $Qt5_DIR"
-          ./opt/qt${QTVERMIN}/bin/qt${QTVERMIN}-env.sh
+          source /opt/qt${QTVERMIN}/bin/qt${QTVERMIN}-env.sh
         fi
         echo "Qt version $(qmake -v | grep 'Qt' | awk ' { print $4 } ')"
         mkdir build
