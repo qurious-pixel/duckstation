@@ -92,15 +92,22 @@ UPDATE_INFORMATION="zsync|https://github.com/stenzek/duckstation/releases/downlo
 OUTPUT="duckstation-qt-x64.AppImage" \
 ${BUILD_DIR}/linuxdeploy-plugin-appimage-x86_64.AppImage \
   --appdir=${BUILD_DIR}/duckstation-qt.AppDir
-  
+
+if [[ -e $Qt6_DIR ]]; then
+	QTPATH=${GITHUB_WORKSPACE}/$Qt6_DIR/gcc_64
+	QTWAYLAND=libQt6WaylandClient.so.6
+else
+	QTPATH=/$Qt5_DIR/
+	QTWAYLAND=libQt5WaylandClient.so.5
+fi
+
 cp -r ${BUILD_DIR}/duckstation-qt.AppDir ${BUILD_DIR}/duckstation-wayland.AppDir
 mkdir -p ${BUILD_DIR}/duckstation-wayland.AppDir/usr/plugins
 mkdir -p ${BUILD_DIR}/duckstation-wayland.AppDir/usr/lib/dri
-#cp /usr/lib/x86_64-linux-gnu/{libQt5WaylandClient.so.5,libEGL_mesa.so.0} ${BUILD_DIR}/duckstation-wayland.AppDir/usr/lib
-cp ${GITHUB_WORKSPACE}/qt/6.2.0/gcc_64/lib/{libQt6WaylandClient.so.6,libEGL_mesa.so.0} ${BUILD_DIR}/duckstation-wayland.AppDir/usr/lib
+#cp /usr/lib/x86_64-linux-gnu/libEGL_mesa.so.0 ${BUILD_DIR}/duckstation-wayland.AppDir/usr/lib
+cp ${QTPATH}/lib/${QTWAYLAND} ${BUILD_DIR}/duckstation-wayland.AppDir/usr/lib
 cp /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so ${BUILD_DIR}/duckstation-wayland.AppDir/usr/lib/dri
-#cp -r /usr/lib/x86_64-linux-gnu/qt5/plugins/{xcbglintegrations,platforms,wayland-graphics-integration-client,wayland-decoration-client,wayland-shell-integration} ${BUILD_DIR}/duckstation-wayland.AppDir/usr/plugins
-cp -r ${GITHUB_WORKSPACE}/qt/6.2.0/gcc_64/plugins/{xcbglintegrations,platforms,wayland-graphics-integration-client,wayland-decoration-client,wayland-shell-integration} ${BUILD_DIR}/duckstation-wayland.AppDir/usr/plugins
+cp -r ${QTPATH}/plugins/{xcbglintegrations,platforms,wayland-graphics-integration-client,wayland-decoration-client,wayland-shell-integration} ${BUILD_DIR}/duckstation-wayland.AppDir/usr/plugins
 
 cat <<'EOF'>> ${BUILD_DIR}/duckstation-wayland.AppDir/apprun-hooks/linuxdeploy-plugin-qt-hook.sh
 
