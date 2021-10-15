@@ -104,7 +104,7 @@ fi
 cp -r ${BUILD_DIR}/duckstation-qt.AppDir ${BUILD_DIR}/duckstation-wayland.AppDir
 mkdir -p ${BUILD_DIR}/duckstation-wayland.AppDir/usr/plugins
 mkdir -p ${BUILD_DIR}/duckstation-wayland.AppDir/usr/lib/dri
-#cp /usr/lib/x86_64-linux-gnu/libEGL_mesa.so.0 ${BUILD_DIR}/duckstation-wayland.AppDir/usr/lib
+cp /usr/lib/x86_64-linux-gnu/libEGL_mesa.so.0 ${BUILD_DIR}/duckstation-wayland.AppDir/usr/lib
 cp ${QTPATH}/lib/${QTWAYLAND} ${BUILD_DIR}/duckstation-wayland.AppDir/usr/lib
 cp /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so ${BUILD_DIR}/duckstation-wayland.AppDir/usr/lib/dri
 cp -r ${QTPATH}/plugins/{xcbglintegrations,platforms,wayland-graphics-integration-client,wayland-decoration-client,wayland-shell-integration} ${BUILD_DIR}/duckstation-wayland.AppDir/usr/plugins
