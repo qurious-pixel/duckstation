@@ -93,11 +93,11 @@ OUTPUT="duckstation-qt-x64.AppImage" \
 ${BUILD_DIR}/linuxdeploy-plugin-appimage-x86_64.AppImage \
   --appdir=${BUILD_DIR}/duckstation-qt.AppDir
 
-if [[ -e $Qt6_DIR ]]; then
-	QTPATH=${GITHUB_WORKSPACE}/$Qt6_DIR/gcc_64
+if [[ -e $QT6_DIR ]]; then
+	QTPATH=${GITHUB_WORKSPACE}/$QT6_DIR/gcc_64
 	QTWAYLAND=libQt6WaylandClient.so.6
 else
-	QTPATH=/$Qt5_DIR/
+	QTPATH=/$QT5_DIR/
 	QTWAYLAND=libQt5WaylandClient.so.5
 fi
 
