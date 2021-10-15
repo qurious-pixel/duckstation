@@ -57,8 +57,10 @@ jobs:
           sudo mv /usr/bin/qmake /usr/bin/qmake5
           sudo ln -s ${GITHUB_WORKSPACE}/$(find qt/ -name qmake) /usr/bin
         else
-          export CMAKE_PREFIX_PATH=/$Qt5_DIR
-          export Qt5_DIR=${CMAKE_PREFIX_PATH}/lib/cmake/Qt5/          
+          export CMAKE_PREFIX_PATH=/$Qt5_DIR/lib/cmake
+          export Qt5_DIR=${CMAKE_PREFIX_PATH}/Qt5/
+          echo "CMAKE_PREFIX_PATH $CMAKE_PREFIX_PATH"
+          echo "Qt5_DIR $Qt5_DIR"
           /opt/qt${QTVERMIN}/bin/qt${QTVERMIN}-env.sh
         fi
         mkdir build
