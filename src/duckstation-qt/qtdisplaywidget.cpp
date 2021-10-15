@@ -11,7 +11,7 @@
 #include <cmath>
 
 #if !defined(_WIN32) && !defined(APPLE)
-#include <QPlatformNativeInterface>
+#include <qpa/qplatformnativeinterface.h>
 #endif
 
 QtDisplayWidget::QtDisplayWidget(QWidget* parent) : QWidget(parent)
