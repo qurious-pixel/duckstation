@@ -48,7 +48,7 @@ jobs:
     - name: Compile build
       shell: bash
       env:
-        Qt5_DIR: "opt/515"
+        Qt5_DIR: "opt/qt515"
         Qt6_DIR: "qt/6.2.0"
       run: |
         if [[ -e $Qt6_DIR ]]; then
