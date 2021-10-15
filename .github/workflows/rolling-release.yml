@@ -62,7 +62,7 @@ jobs:
           echo "CMAKE_PREFIX_PATH $CMAKE_PREFIX_PATH"
           echo "Qt5_DIR $Qt5_DIR"
           sudo mv /usr/bin/qmake /usr/bin/qmake5
-          sudo ln -s /${QT5_DIR}/$(find bin/ -name qmake) /usr/bin          
+          sudo ln -s /${QT5_DIR}/$(find . -name qmake) /usr/bin          
         fi
         echo "Qt version $(qmake -v | grep 'Qt' | awk ' { print $4 } ')"
         mkdir build
