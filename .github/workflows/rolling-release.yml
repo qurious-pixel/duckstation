@@ -95,7 +95,7 @@ jobs:
 
   
   create-release:
-    needs: [windows-build, windows-arm64-build, linux-build, windows-uwp-build]
+    needs: [linux-build]
     runs-on: "ubuntu-20.04"
     if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev'
     steps:
