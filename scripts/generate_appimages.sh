@@ -93,13 +93,16 @@ OUTPUT="duckstation-qt-x64.AppImage" \
 ${BUILD_DIR}/linuxdeploy-plugin-appimage-x86_64.AppImage \
   --appdir=${BUILD_DIR}/duckstation-qt.AppDir
 
-if [[ -e $QT6_DIR ]]; then
+if [[ if [[ $(qmake -v | grep 'Qt' | awk ' { print $4 } ' | cut -d '.' -f 1) > 5 ]]; then
 	QTPATH=${GITHUB_WORKSPACE}/$QT6_DIR/gcc_64
 	QTVER=6
 else
 	QTPATH=/$QT5_DIR/
 	QTVER=5
 fi
+
+echo "QTPATH $QTPATH"
+echo "QTVER $QTVER"
 
 cp -r ${BUILD_DIR}/duckstation-qt.AppDir ${BUILD_DIR}/duckstation-wayland.AppDir
 mkdir -p ${BUILD_DIR}/duckstation-wayland.AppDir/usr/plugins
