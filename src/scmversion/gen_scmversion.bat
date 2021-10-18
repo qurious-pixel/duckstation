@@ -28,9 +28,7 @@ ECHO const char* g_scm_tag_lo_str = "%TAG:~4,4%";
 
 TYPE scmversion.cpp
 
-(Get-content ../duckstation-qt/duckstation-qt.rc) | Foreach-Object {$_ -replace "g_scm_tag_hi_str", "%TAG:~4,4%"} | Set-Content ../duckstation-qt/duckstation-qt.rc
-
-TYPE ../duckstation-qt/duckstation-qt.rc
+TYPE ..\duckstation-qt\duckstation-qt.rc
 
 
 EXIT
