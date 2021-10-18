@@ -26,13 +26,10 @@ ECHO const char* g_scm_tag_med_str = "%TAG:~2,1%";
 ECHO const char* g_scm_tag_lo_str = "%TAG:~4,4%";
 )>%VERSIONFILE%
 
-TYPE scmversion.cpp
 
-:: TYPE ..\duckstation-qt\duckstation-qt.rc
+powershell -Command "(gc ..\duckstation-qt\duckstation-qt.rc) -replace 'DUCK_Version', '"%TAG:~0,1%"."%TAG:~2,1%"."%TAG:~4,4%"' | Out-File -encoding ASCII ..\duckstation-qt\duckstation-qt.rc"
+TYPE ..\duckstation-qt\duckstation-qt.rc
 
-ECHO foo > myFile.txt
-powershell -Command "(gc myFile.txt) -replace 'foo', '"%TAG:~0,1%"."%TAG:~2,1%"."%TAG:~4,4%"' | Out-File -encoding ASCII myFile.txt"
-TYPE myFile.txt
 
 
 EXIT
