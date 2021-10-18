@@ -28,7 +28,11 @@ ECHO const char* g_scm_tag_lo_str = "%TAG:~4,4%";
 
 TYPE scmversion.cpp
 
-TYPE ..\duckstation-qt\duckstation-qt.rc
+:: TYPE ..\duckstation-qt\duckstation-qt.rc
+
+ECHO foo > myFile.txt
+powershell -Command "(gc myFile.txt) -replace 'foo', 'bar' | Out-File -encoding ASCII myFile.txt"
+TYPE myFile.txt
 
 
 EXIT
