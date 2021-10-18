@@ -75,6 +75,7 @@
     <ClInclude Include="inputbindingmonitor.h" />
     <QtMoc Include="memoryviewwidget.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="scmversion/scmversion.h" />
     <ClInclude Include="settingwidgetbinder.h" />
     <QtMoc Include="consolesettingswidget.h" />
     <QtMoc Include="emulationsettingswidget.h" />
