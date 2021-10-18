@@ -31,7 +31,7 @@ TYPE scmversion.cpp
 :: TYPE ..\duckstation-qt\duckstation-qt.rc
 
 ECHO foo > myFile.txt
-powershell -Command "(gc myFile.txt) -replace 'foo', "%TAG:~0,1%.%TAG:~0,1%.%TAG:~4,4%" | Out-File -encoding ASCII myFile.txt"
+powershell -Command "(gc myFile.txt) -replace 'foo', '%TAG:~4,4%' | Out-File -encoding ASCII myFile.txt"
 TYPE myFile.txt
 
 
