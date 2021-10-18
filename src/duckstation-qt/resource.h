@@ -1,3 +1,4 @@
+#include scmversion/scmversion.h
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
 // Used by duckstation-qt.rc
