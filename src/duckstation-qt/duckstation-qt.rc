@@ -52,8 +52,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION DUCK_Version
- PRODUCTVERSION DUCK_Version
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -70,12 +70,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "https://github.com/stenzek/duckstation"
             VALUE "FileDescription", "DuckStation PS1 Emulator"
-            VALUE "FileVersion", "DUCK_Version"
+            VALUE "FileVersion", "1.0.0.1"
             VALUE "InternalName", "duckstation-qt.exe"
             VALUE "LegalCopyright", "Copyright (C) 2020 Stenzek and collaborators"
             VALUE "OriginalFilename", "duckstation-qt.exe"
             VALUE "ProductName", "DuckStation Qt Frontend"
-            VALUE "ProductVersion", "DUCK_Version"
+            VALUE "ProductVersion", "1.0.0.1"
         END
     END
     BLOCK "VarFileInfo"
