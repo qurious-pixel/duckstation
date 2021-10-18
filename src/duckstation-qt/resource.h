@@ -1,4 +1,3 @@
-#include scmversion/scmversion.h
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
 // Used by duckstation-qt.rc
@@ -16,20 +15,3 @@
 #endif
 #endif
 
-// Add Version info
-//
-const auto DUCK_VersionHi = string(g_scm_tag_hi_str);
-const auto DUCK_VersionMid = string(g_scm_tag_med_str);
-const auto DUCK_VersionLo = string(g_scm_tag_lo_str);
-
-#define STRINGIZE2(s) #s
-#define STRINGIZE(s) STRINGIZE2(s)
-
-#define VER_FILE_VERSION            DUCK_VersionHi, DUCK_VersionMid, DUCK_VersionLo, 0
-#define VER_FILE_VERSION_STR        STRINGIZE(DUCK_VersionHi)        \
-                                    "." STRINGIZE(DUCK_VersionMid)    \
-                                    "." STRINGIZE(DUCK_VersionLo) \
-                                    "." STRINGIZE(0)    \
-                                    
-#define VER_PRODUCT_VERSION         VER_FILE_VERSION
-#define VER_PRODUCT_VERSION_STR     VER_FILE_VERSION_STR
