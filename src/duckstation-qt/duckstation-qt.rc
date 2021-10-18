@@ -45,16 +45,6 @@ END
 
 #endif    // APSTUDIO_INVOKED
 
-/////////////////////////////////////////////////////////////////////////////
-
-// Add Version info
-//
-
-#define VER_FILE_VERSION            DUCK_Version
-#define VER_FILE_VERSION_STR        DUCK_Version
-                                    
-#define VER_PRODUCT_VERSION         VER_FILE_VERSION
-#define VER_PRODUCT_VERSION_STR     VER_FILE_VERSION_STR
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -62,8 +52,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION VER_FILE_VERSION
- PRODUCTVERSION VER_PRODUCT_VERSION
+ FILEVERSION DUCK_Version
+ PRODUCTVERSION DUCK_Version
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -80,12 +70,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "https://github.com/stenzek/duckstation"
             VALUE "FileDescription", "DuckStation PS1 Emulator"
-            VALUE "FileVersion", VER_FILE_VERSION_STR "\0"
+            VALUE "FileVersion", "DUCK_Version"
             VALUE "InternalName", "duckstation-qt.exe"
             VALUE "LegalCopyright", "Copyright (C) 2020 Stenzek and collaborators"
             VALUE "OriginalFilename", "duckstation-qt.exe"
             VALUE "ProductName", "DuckStation Qt Frontend"
-            VALUE "ProductVersion", VER_PRODUCT_VERSION_STR "\0"
+            VALUE "ProductVersion", "DUCK_Version"
         END
     END
     BLOCK "VarFileInfo"
