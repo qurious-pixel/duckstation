@@ -83,7 +83,7 @@ jobs:
         copy build\ReleaseUWP-x64\duckstation-uwp\duckstation-uwp_1.0.0.0_Bundle\duckstation-uwp_1.0.0.0_x64_ReleaseUWP.appx duckstation-uwp.appx
 
     - name: Export certificate
-      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/uwp'
+      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev'
       shell: powershell
       run: |
         Get-PfxCertificate -FilePath .\src\duckstation-uwp\duckstation-uwp.pfx | Export-Certificate -FilePath duckstation-uwp.der -Type CERT
