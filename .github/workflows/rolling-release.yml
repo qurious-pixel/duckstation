@@ -61,8 +61,7 @@ jobs:
       if: github.ref != 'refs/heads/master' || github.ref != 'refs/heads/dev'
       shell: cmd
       run: |
-        gc src\duckstation-uwp\duckstation-uwp.vcxproj |
-        -replace '<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>', '<AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>' |
+        gc src\duckstation-uwp\duckstation-uwp.vcxproj -replace '<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>', '<AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>' |
         Out-File -encoding ASCII src\duckstation-uwp\duckstation-uwp.vcxproj
       
     - name: Restore nuget packages
