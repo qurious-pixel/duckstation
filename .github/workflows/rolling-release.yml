@@ -59,10 +59,12 @@ jobs:
 
     - name: Disable Appx signing
       if: github.ref != 'refs/heads/master' || github.ref != 'refs/heads/dev'
-      shell: cmd
+      shell: powershell
       run: |
+        $pwd
         gc src\duckstation-uwp\duckstation-uwp.vcxproj -replace '<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>', '<AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>' | Out-File -encoding ASCII src\duckstation-uwp\duckstation-uwp.vcxproj
-      
+        type src\duckstation-uwp\duckstation-uwp.vcxproj
+        
     - name: Restore nuget packages
       shell: cmd
       run: |
