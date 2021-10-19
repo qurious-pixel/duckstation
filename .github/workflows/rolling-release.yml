@@ -62,7 +62,7 @@ jobs:
       shell: powershell
       run: |
         $pwd
-        Get-ChildItem
+        Get-ChildItem C:\
         gc .\src\duckstation-uwp\duckstation-uwp.vcxproj -replace '<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>', '<AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>' | Out-File -encoding ASCII .\src\duckstation-uwp\duckstation-uwp.vcxproj
         type .\src\duckstation-uwp\duckstation-uwp.vcxproj
         
