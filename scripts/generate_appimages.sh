@@ -31,8 +31,8 @@ wget --timestamping --directory-prefix=${BUILD_DIR} \
 chmod +x ${BUILD_DIR}/AppRun-patched-x86_64
 
 wget --timestamping --directory-prefix=${BUILD_DIR} \
-	https://github.com/darealshinji/AppImageKit-checkrt/releases/download/continuous/exec-x86_64 
-chmod +x ${BUILD_DIR}/exec-x86_64
+	https://github.com/darealshinji/AppImageKit-checkrt/releases/download/continuous/exec-x86_64.so
+chmod +x ${BUILD_DIR}/exec-x86_64.so
 
 # Copy icons into the <resolution>/<app_name>.<ext> directory structure that linuxdeploy nominally expects,
 # e.g. 16x16/duckstation-qt.png, 32x32/duckstation-qt.png, etc.
@@ -75,7 +75,7 @@ for frontend in ${FRONTENDS[@]}; do
   CURRENT_APPDIR=${BUILD_DIR}/duckstation-${frontend}.AppDir
   mkdir -p ${CURRENT_APPDIR}/usr/optional/{libstdc++,libgcc_s}
   cp ${BUILD_DIR}/AppRun-patched-x86_64 ${CURRENT_APPDIR}/AppRun
-  cp ${BUILD_DIR}/exec-x86_64 ${CURRENT_APPDIR}/usr/optional/exec.so
+  cp ${BUILD_DIR}/exec-x86_64.so ${CURRENT_APPDIR}/usr/optional/exec.so
   cp --dereference /usr/lib/x86_64-linux-gnu/libstdc++.so.6 ${CURRENT_APPDIR}/usr/optional/libstdc++/libstdc++.so.6
   cp --dereference /lib/x86_64-linux-gnu/libgcc_s.so.1 ${CURRENT_APPDIR}/usr/optional/libgcc_s/libgcc_s.so.1
 done
