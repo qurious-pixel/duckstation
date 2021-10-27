@@ -141,7 +141,7 @@ if(NOT ANDROID)
   endif()
   if(BUILD_QT_FRONTEND)
     find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Gui Widgets Network LinguistTools REQUIRED)
-    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Gui Widgets Network LinguistTools REQUIRED)
+    #find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Gui Widgets Network LinguistTools REQUIRED)
   endif()
 endif()
 
