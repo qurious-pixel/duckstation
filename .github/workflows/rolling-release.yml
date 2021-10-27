@@ -19,7 +19,7 @@ jobs:
   linux-build:
     runs-on: ubuntu-20.04
     env:
-      QTVER: 5.12.8
+      QTVER: 5.12.9
       QTVERMIN: 512
       UBUNTU_VER: focal
     steps:
