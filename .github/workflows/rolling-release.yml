@@ -46,9 +46,10 @@ jobs:
     - name: Compile build
       shell: bash
       env:
-        QT5_DIR: "opt/qt$QTVERMIN"
-        QT6_DIR: "qt/$QT6VERSION"
+        QT5_DIR: "opt/qt${{ env.QTVERMIN }}"
+        QT6_DIR: "qt/${{ env.QT6VERSION }}"
       run: |
+        echo "$QTVERMIN $QT5_DIR"
         if [[ -e $QT6_DIR ]]; then
           export CMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/$QT6_DIR/gcc_64
           export Qt6_DIR=${CMAKE_PREFIX_PATH}/lib/cmake/Qt6/
