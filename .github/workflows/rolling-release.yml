@@ -56,17 +56,13 @@ jobs:
       env:
         Qt6_DIR: "qt/6.2.0"
       run: |
-        echo "HOME ${GITHUB_WORKSPACE}"
-        export CMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/$Qt6_DIR/gcc_64
-        export Qt6_DIR=${CMAKE_PREFIX_PATH}/lib/cmake/Qt6/
-        echo "Qt6_DIR ${Qt6_DIR}"
-        find qt/ -name Qt6Config.cmake 
-        sudo mv /usr/bin/qmake /usr/bin/qmake5
-        find qt/ -name qmake
-        sudo ln -s ${GITHUB_WORKSPACE}/$(find qt/ -name qmake) /usr/bin
+        QT_BASE_DIR=${GITHUB_WORKSPACE}/${{ env.Qt6_DIR }}/gcc_64
+        export QTDIR=$QT_BASE_DIR
+        export PATH=$QT_BASE_DIR/bin:$PATH
+        export LD_LIBRARY_PATH=$QT_BASE_DIR/lib:$LD_LIBRARY_PATH
         mkdir build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_NOGUI_FRONTEND=ON -DBUILD_QT_FRONTEND=ON -DUSE_DRMKMS=ON -DUSE_EGL=ON -DUSE_SDL2=ON -DUSE_WAYLAND=ON -DUSE_X11=ON -G Ninja ..
+        cmake -DUSE_QT6 -DCMAKE_BUILD_TYPE=Release -DBUILD_NOGUI_FRONTEND=ON -DBUILD_QT_FRONTEND=ON -DUSE_DRMKMS=ON -DUSE_EGL=ON -DUSE_SDL2=ON -DUSE_WAYLAND=ON -DUSE_X11=ON -G Ninja ..
         ninja
         ../scripts/generate_appimages.sh $(pwd)
 
@@ -106,36 +102,6 @@ jobs:
         name: "linux-x64-appimage-wayland-zsync"
         path: "build/duckstation-wayland-x64.AppImage.zsync"
 
-  macos-build:
-    runs-on: macos-10.15
-    steps:
-    - uses: actions/checkout@v2.3.1
-      with:
-        fetch-depth: 0
-
-    - name: Install packages
-      shell: bash
-      run: |
-        brew install qt6 sdl2 curl
-    - name: Clone mac externals
-      shell: bash
-      run: |
-        git clone https://github.com/stenzek/duckstation-ext-mac.git dep/mac
-    - name: Compile and zip .app
-      shell: bash
-      run: |
-        mkdir build
-        cd build
-        export MACOSX_DEPLOYMENT_TARGET=10.15
-        cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_NOGUI_FRONTEND=OFF -DBUILD_QT_FRONTEND=ON -DUSE_SDL2=ON -DQt6_DIR=/usr/local/opt/qt@6/lib/cmake/Qt6 ..
-        cmake --build . --parallel 2
-        cd bin
-        zip -r duckstation-mac-release.zip DuckStation.app/
-    - name: Upload macOS .app
-      uses: actions/upload-artifact@v1
-      with:
-        name: "macos-x64"
-        path: "build/bin/duckstation-mac-release.zip"
         
   create-release:
     needs: [linux-build]
