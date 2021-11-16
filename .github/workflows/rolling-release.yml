@@ -26,7 +26,7 @@ jobs:
       QTVERMIN: 515
       UBUNTU_VER: focal
       QT6VERSION: 6.2.0
-      USE_QT6: true 
+      USE_QT6: false
     steps:
     - uses: actions/checkout@v2.3.1
       with:
