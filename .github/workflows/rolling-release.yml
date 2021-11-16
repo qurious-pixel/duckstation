@@ -59,11 +59,11 @@ jobs:
           if [[ -e $QT6_DIR ]]; then
             curl -sL https://github.com/qurious-pixel/duckstation-ext-qt-minimal/releases/download/v6.2.0/Qt_6.2.0.tar.gz -o dep/msvc/qt/Qt_6.2.0.tar.gz
             tar -xf Qt_6.2.0.tar.gz
-            ls -al dep/msvc/qt/
-            ls "dep/msvc/qt/${{ env.QT6VERSION }}"
-            sudo mv /usr/bin/qmake /usr/bin/qmake5
-            sudo ln -s $(find /${QT6_DIR} -name qmake) /usr/bin  
           fi
+        ls -al dep/msvc/qt/
+        ls "dep/msvc/qt/${{ env.QT6VERSION }}"
+        sudo mv /usr/bin/qmake /usr/bin/qmake5
+        sudo ln -s $(find /${QT6_DIR} -name qmake) /usr/bin    
         else
           QT_CMAKE_VER="-DUSE_QT6=OFF"
           export CMAKE_PREFIX_PATH=/$QT5_DIR/lib/cmake
