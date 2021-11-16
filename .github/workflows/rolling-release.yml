@@ -270,25 +270,23 @@ jobs:
         sudo apt-get update
         sudo apt-get -y install cmake ninja-build ccache libsdl2-dev libgtk-3-dev qt${QTVERMIN}base qt${QTVERMIN}declarative qt${QTVERMIN}xmlpatterns qt${QTVERMIN}svg qt${QTVERMIN}tools qt${QTVERMIN}translations qt${QTVERMIN}wayland qt${QTVERMIN}webengine libegl1-mesa-dev libevdev-dev libgbm-dev libdrm-dev libwayland-dev libwayland-egl-backend-dev extra-cmake-modules libcurl4-gnutls-dev libxrandr-dev
 
-    - name: Install Qt6
-      uses: WillBrennan/yaqti@2021.07.29
-      with:
-        version: "${{ env.QT6VERSION }}"
-        os: 'linux'
-        platform: 'desktop'
-        modules: 'qtwaylandcompositor'
+    #- name: Install Qt6
+    #  uses: WillBrennan/yaqti@2021.07.29
+    #  with:
+    #    version: "${{ env.QT6VERSION }}"
+    #    os: 'linux'
+    #    platform: 'desktop'
+    #    modules: 'qtwaylandcompositor'
         
     - name: Compile build
       shell: bash
       env:
         QT5_DIR: "opt/qt${{ env.QTVERMIN }}"   
-        QT6_DIR: "qt/${{ env.QT6VERSION }}"
+        QT6_DIR: "dep/msvc/qt/${{ env.QT6VERSION }}"
       run: |
         if [[ -e $QT6_DIR ]]; then
-          export CMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/$QT6_DIR/gcc_64
-          export Qt6_DIR=${CMAKE_PREFIX_PATH}/lib/cmake/Qt6/
-          sudo mv /usr/bin/qmake /usr/bin/qmake5
-          sudo ln -s ${GITHUB_WORKSPACE}/$(find qt/ -name qmake) /usr/bin
+          curl -sL https://github.com/qurious-pixel/duckstation-ext-qt-minimal/releases/download/v6.2.0/Qt_6.2.0.tar.gz -o dep/msvc/qt/
+          tar -xf Qt_6.2.0.tar.gz 
         else
           export CMAKE_PREFIX_PATH=/$QT5_DIR/lib/cmake
           export Qt5_DIR=${CMAKE_PREFIX_PATH}/Qt5/
