@@ -61,7 +61,7 @@ jobs:
             tar -xf Qt_6.2.0.tar.gz -C dep/msvc/qt/
           fi
         sudo mv /usr/bin/qmake /usr/bin/qmake5
-        sudo ln -s $(find ${QT6_DIR} -name qmake) /usr/bin    
+        sudo ln -s $(find $GITHUB_WORKSPACE/${QT6_DIR} -name qmake) /usr/bin    
         else
           QT_CMAKE_VER="-DUSE_QT6=OFF"
           export CMAKE_PREFIX_PATH=/$QT5_DIR/lib/cmake
