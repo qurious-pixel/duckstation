@@ -55,9 +55,14 @@ jobs:
       run: |
         if [[ ${{ env.USE_QT6 }} == true ]]; then 
         QT_CMAKE_VER="-DUSE_QT6=ON"
+        echo $QT_CMAKE_VER
           if [[ -e $QT6_DIR ]]; then
-            curl -sL https://github.com/qurious-pixel/duckstation-ext-qt-minimal/releases/download/v6.2.0/Qt_6.2.0.tar.gz -o dep/msvc/qt/
-            tar -xf Qt_6.2.0.tar.gz 
+            curl -sL https://github.com/qurious-pixel/duckstation-ext-qt-minimal/releases/download/v6.2.0/Qt_6.2.0.tar.gz -o dep/msvc/qt/Qt_6.2.0.tar.gz
+            tar -xf Qt_6.2.0.tar.gz
+            ls -al dep/msvc/qt/
+            ls "dep/msvc/qt/${{ env.QT6VERSION }}"
+            sudo mv /usr/bin/qmake /usr/bin/qmake5
+            sudo ln -s $(find /${QT6_DIR} -name qmake) /usr/bin  
           fi
         else
           QT_CMAKE_VER="-DUSE_QT6=OFF"
