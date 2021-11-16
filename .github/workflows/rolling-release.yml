@@ -56,6 +56,7 @@ jobs:
         if [[ ${{ env.USE_QT6 }} == true ]]; then 
         QT_CMAKE_VER="-DUSE_QT6=ON"
         echo $QT_CMAKE_VER
+        ls -al dep/msvc/qt/
           if [[ -e $QT6_DIR ]]; then
             curl -sSfLO https://github.com/qurious-pixel/duckstation-ext-qt-minimal/releases/download/v6.2.0/Qt_6.2.0.tar.gz
             tar -xvf Qt_6.2.0.tar.gz -C dep/msvc/qt/
